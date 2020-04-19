@@ -12,7 +12,11 @@
     >
       <el-table-column
         width="55">
-        <el-checkbox size="mini" slot="header"></el-checkbox>
+        <el-checkbox
+        size="mini"
+        slot="header"
+        v-model="toggleAll"
+        ></el-checkbox>
         <!--
           @change="onIsCheckedChange"  默认参数：更新后的值
           @change="onIsCheckedChange(123)"  123
@@ -41,7 +45,16 @@
         prop="count"
         label="数量">
         <template slot-scope="scope">
-          <el-input-number v-model="scope.row.count" size="mini"></el-input-number>
+          <el-input-number
+          :value="scope.row.count"
+          size="mini"
+          @change="updateProductCount({
+            productId: scope.row.id,
+            count: $event
+          })"
+          >
+
+          </el-input-number>
         </template>
       </el-table-column>
       <el-table-column
@@ -56,7 +69,7 @@
       </el-table-column>
     </el-table>
     <div>
-      <p>已选 <span>{{totalCount}}</span> 件商品，总价：<span>{{totalCountPrice}}</span></p>
+      <p>已选 <span>{{totalCheckedCount}}</span> 件商品，总价：<span>{{totalCountPrice}}</span></p>
       <el-button type="danger">结算</el-button>
     </div>
   </div>
@@ -69,10 +82,38 @@ export default {
   name: 'CartIndex',
   computed: {
     ...mapState('cart', ['cartProducts']),
-    ...mapGetters('cart', ['totalCount', 'totalCountPrice'])
+    ...mapGetters('cart', ['totalCount', 'totalCountPrice', 'totalCheckedCount']),
+
+    // 全选按钮的状态控制
+    toggleAll: {
+      // 在get中获取全选按钮的选中转态
+      get () {
+        // console.log('toggleAll get')
+        // return true
+        // 定义一个标识符
+        let checked = true
+        this.cartProducts.forEach(item => {
+          if (!item.isChecked) {
+            checked = false
+          }
+        })
+        return checked
+      },
+      // 在set中设置其他商品的选中状态
+      set (value) {
+        // console.log('toggleAll set', value)
+        this.updateAllProductChecked(value)
+      }
+    }
   },
   methods: {
-    ...mapMutations('cart', ['deleteProduct', 'updateChecked'])
+    ...mapMutations('cart',
+      [
+        'deleteProduct',
+        'updateChecked',
+        'updateAllProductChecked',
+        'updateProductCount'
+      ])
     // CheckedChange (productId, checked) {
     //   // product.isChecked = checked
     //   // console.log(product, checked)

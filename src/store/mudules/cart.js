@@ -24,6 +24,16 @@ const getters = {
       price += (item.count * item.price)
     })
     return price
+  },
+  // 所有选中商品的数量
+  totalCheckedCount (state) {
+    let count = 0
+    state.cartProducts.forEach(item => {
+      if (item.isChecked) {
+        count += item.count
+      }
+    })
+    return count
   }
 }
 
@@ -61,6 +71,20 @@ const mutations = {
     state.cartProducts.forEach((item, index) => {
       if (item.id === productId) {
         item.isChecked = checked
+      }
+    })
+  },
+  // 全选按钮的状态
+  updateAllProductChecked (state, checked) {
+    state.cartProducts.forEach(item => {
+      item.isChecked = checked
+    })
+  },
+  // 更新商品的数量
+  updateProductCount (state, { productId, count }) {
+    state.cartProducts.forEach(item => {
+      if (item.id === productId) {
+        item.count = count
       }
     })
   }
