@@ -36,6 +36,8 @@ const mutations = {
     const item = state.cartProducts.find(p => p.id === product.id)
     if (item) {
       item.count++
+      // 同类型的商品如果再次添加，则一定被选中
+      item.isChecked = true
     } else {
       // 如果没有
       state.cartProducts.push({
@@ -51,6 +53,14 @@ const mutations = {
       if (item.id === product.id) {
         // state.cartProducts.splice(要删除的索引，要删除的数量)
         state.cartProducts.splice(index, 1)
+      }
+    })
+  },
+  // 更新商品的选中状态
+  updateChecked (state, { productId, checked }) {
+    state.cartProducts.forEach((item, index) => {
+      if (item.id === productId) {
+        item.isChecked = checked
       }
     })
   }

@@ -23,7 +23,9 @@
           <el-checkbox
             size="mini"
             :value="scope.row.isChecked"
-            @change="onIsCheckedChange(scope.row, $event)"
+            @change="updateChecked({
+              productId: scope.row,
+              checked: $event})"
           ></el-checkbox>
         </template>
       </el-table-column>
@@ -54,30 +56,31 @@
       </el-table-column>
     </el-table>
     <div>
-      <p>已选 <span>xxx</span> 件商品，总价：<span>xxx</span></p>
+      <p>已选 <span>{{totalCount}}</span> 件商品，总价：<span>{{totalCountPrice}}</span></p>
       <el-button type="danger">结算</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'CartIndex',
   computed: {
-    ...mapState('cart', ['cartProducts'])
+    ...mapState('cart', ['cartProducts']),
+    ...mapGetters('cart', ['totalCount', 'totalCountPrice'])
   },
   methods: {
-    // ...mapMutations('cart', ['deleteProduct', 'updateProductChecked']),
-    onIsCheckedChange (product, checked) {
-      // product.isChecked = checked
-      // console.log(product, checked)
-      this.updateProductChecked({
-        product,
-        checked
-      })
-    }
+    ...mapMutations('cart', ['deleteProduct', 'updateChecked'])
+    // CheckedChange (productId, checked) {
+    //   // product.isChecked = checked
+    //   // console.log(product, checked)
+    //   this.updateChecked({
+    //     productId,
+    //     checked
+    //   })
+    // }
   }
   // data () {
   //   return {
