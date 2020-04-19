@@ -28,22 +28,20 @@ const getters = {
 }
 
 const mutations = {
-  addCart (state, product) {
-    // 添加购物车
-  // 如果已经有该商品，则让购物车商品的数量+1
-  // 如果没有，才添加新的商品进来{id：xxx, title: xxx, price:xxx }
-  // 查找购物车数组中复合该条件的元素  返回该元素find()方法
+// 添加购物车 添加的actions函数在组件的methods里去调用
+  addToCart (state, product) {
+    console.log(product)
+    // 如果有购物车已经有了该商品，购物车数量+1
+    // 如果没有该商品则添加
     const item = state.cartProducts.find(p => p.id === product.id)
-
-    // 如果购物车有了添加的商品，则商品数量+1
     if (item) {
       item.count++
     } else {
-      // 如果没有则新增商品
+      // 如果没有
       state.cartProducts.push({
         ...product,
         isChecked: false,
-        count: 0
+        count: 1
       })
     }
   }

@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'ProductList',
@@ -53,24 +53,11 @@ export default {
   methods: {
     // 获取后端数据，将action里面的请求方法映射过来
     ...mapActions('products', ['getAllProducts']),
-
-    // 添加购物车
-    addToCart (product) {
-      // cart模块里面的addCart,传递参数商品product
-      this.$store.commit('car/addCart', product)
-    }
+    // 添加购物车，映射mapMutations里面的方法
+    ...mapMutations('cart', ['addToCart'])
   }
-  // created () {
-  //   // 1. 调用 action
-  //   // this.$store.dispatch('action函数')
-  //   this.getAllProducts()
-  // },
-
-  // methods: {
-  //   // ...mapActions('products', ['getAllProducts']),
-  //   // ...mapMutations('cart', ['addToCart'])
-  // }
 }
+
 </script>
 
 <style></style>
