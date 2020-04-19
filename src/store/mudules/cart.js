@@ -1,4 +1,5 @@
 // 购物车数据容器模块
+import axios from 'axios'
 const state = {
   message: 'cart message',
   cartProducts: [
@@ -87,11 +88,28 @@ const mutations = {
         item.count = count
       }
     })
+  },
+  // 清空购物车
+  setCartProducts (state, products) {
+    state.cartProducts = products
   }
 }
 
 const actions = {
-
+  // 结算
+  async checkout (context) {
+    // 请求结算 成功清空购物车，失败
+    const { data } = await axios({
+      method: 'POST',
+      url: 'http://127.0.0.1:3000/checkout'
+    })
+    // 如果成功 清空购物车
+    if (data.succuss) {
+      context.commit('setCartProducts', [])
+    } else {
+      console.log('结算失败')
+    }
+  }
 }
 
 // 导出

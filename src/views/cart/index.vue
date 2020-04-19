@@ -69,14 +69,14 @@
       </el-table-column>
     </el-table>
     <div>
-      <p>已选 <span>{{totalCheckedCount}}</span> 件商品，总价：<span>{{totalCountPrice}}</span></p>
-      <el-button type="danger">结算</el-button>
+      <p>已选 <span>{{ totalCheckedCount }}</span> 件商品，总价：<span>{{ totalCountPrice }}</span></p>
+      <el-button @click="checkout" type="danger">结算</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'CartIndex',
@@ -107,6 +107,8 @@ export default {
     }
   },
   methods: {
+    // 结算
+    ...mapActions('cart', ['checkout']),
     ...mapMutations('cart',
       [
         'deleteProduct',
@@ -114,14 +116,6 @@ export default {
         'updateAllProductChecked',
         'updateProductCount'
       ])
-    // CheckedChange (productId, checked) {
-    //   // product.isChecked = checked
-    //   // console.log(product, checked)
-    //   this.updateChecked({
-    //     productId,
-    //     checked
-    //   })
-    // }
   }
   // data () {
   //   return {
