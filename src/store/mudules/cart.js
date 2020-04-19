@@ -44,6 +44,15 @@ const mutations = {
         count: 1
       })
     }
+  },
+  // 删除购物车商品
+  deleteProduct (state, product) {
+    state.cartProducts.forEach((item, index) => {
+      if (item.id === product.id) {
+        // state.cartProducts.splice(要删除的索引，要删除的数量)
+        state.cartProducts.splice(index, 1)
+      }
+    })
   }
 }
 

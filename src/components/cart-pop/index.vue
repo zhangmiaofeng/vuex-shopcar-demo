@@ -33,6 +33,7 @@ export default {
     ...mapGetters('cart', ['totalCount', 'totalCountPrice'])
   },
   methods: {
+    // 删除购物车商品
     ...mapMutations('cart', ['deleteProduct'])
   }
   // data () {
