@@ -2,7 +2,8 @@
 import axios from 'axios'
 const state = {
   message: 'products message',
-  products: []
+  // 数组数据
+  allProducts: []
 }
 
 const getters = {
@@ -11,21 +12,21 @@ const getters = {
 
 const mutations = {
   // 修改参数
-  setProducts (state, products) {
-    state.products = products
+  setAllProducts (state, products) {
+    state.allProducts = products
   }
 }
 
 const actions = {
   // 在actions里面进行请求数据
-  async getProducts (context) {
+  async getAllProducts (context) {
     const { data } = await axios({
       method: 'GET',
       url: 'http://127.0.0.1:3000/products'
     })
-    // console.log(data),
+    console.log(data)
     // 提交修改数据
-    context.commit('setProducts', data)
+    context.commit('setAllProducts', data)
   }
 }
 

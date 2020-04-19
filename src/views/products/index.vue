@@ -7,6 +7,7 @@
       <el-breadcrumb-item><a href="#/">商品列表</a></el-breadcrumb-item>
     </el-breadcrumb>
     <el-table
+      :data="allProducts"
       style="width: 100%">
       <el-table-column
         prop="title"
@@ -41,22 +42,17 @@ export default {
   //     ]
   //   }
   // },
-  created () {
-    // 调用请求数据的方法
-    this.getProducts()
-    // this.$store.dispatch('products/getProducts')
-  },
   computed: {
     // 把模块的数据映射过来
-    ...mapState('products', {
-      products: state => state.products
-    })
+    ...mapState('products', ['allProducts'])
+  },
+  created () {
+    // 调用请求数据的方法
+    this.getAllProducts()
   },
   methods: {
     // 获取后端数据，将action里面的请求方法映射过来
-    ...mapActions('products', {
-      getProducts: state => state.getProducts
-    }),
+    ...mapActions('products', ['getAllProducts']),
 
     // 添加购物车
     addToCart (product) {
