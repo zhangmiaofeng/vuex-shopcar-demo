@@ -2,6 +2,7 @@
   <div id="app">
     <div>
       <span class="title">Vuex - 购物车示例</span>
+      <h2>{{$store.state.count}}</h2>
       <cart-pop class="pop-cart" />
     </div>
     <router-view />
@@ -10,7 +11,6 @@
 
 <script>
 import CartPop from '@/components/cart-pop'
-
 export default {
   name: 'App',
   components: {

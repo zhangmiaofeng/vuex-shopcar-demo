@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- 测试访问下vuex的数据 -->
+    <h2>{{$store.state.cart.message}}</h2>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>购物车</el-breadcrumb-item>
@@ -59,15 +61,15 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+// import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'CartIndex',
   computed: {
-    ...mapState('cart', ['cartProducts'])
+    // ...mapState('cart', ['cartProducts'])
   },
   methods: {
-    ...mapMutations('cart', ['deleteProduct', 'updateProductChecked']),
+    // ...mapMutations('cart', ['deleteProduct', 'updateProductChecked']),
     onIsCheckedChange (product, checked) {
       // product.isChecked = checked
       // console.log(product, checked)
@@ -76,16 +78,16 @@ export default {
         checked
       })
     }
+  },
+  data () {
+    return {
+      cartProducts: [
+        { 'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01, isChecked: false, count: 0 },
+        { 'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99, isChecked: false, count: 0 },
+        { 'id': 3, 'title': 'Charli XCX - Sucker CD', 'price': 19.99, isChecked: false, count: 0 }
+      ]
+    }
   }
-  // data () {
-  //   return {
-  //     cartProducts: [
-  //       { 'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01, isChecked: false, count: 0 },
-  //       { 'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99, isChecked: false, count: 0 },
-  //       { 'id': 3, 'title': 'Charli XCX - Sucker CD', 'price': 19.99, isChecked: false, count: 0 }
-  //     ]
-  //   }
-  // }
 }
 </script>
 

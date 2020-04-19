@@ -24,26 +24,26 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+// import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'CartPop',
   computed: {
-    ...mapState('cart', ['cartProducts']),
-    ...mapGetters('cart', ['allCartProductsCount', 'allCartProductsPrice'])
+    // ...mapState('cart', ['cartProducts']),
+    // ...mapGetters('cart', ['allCartProductsCount', 'allCartProductsPrice'])
   },
   methods: {
-    ...mapMutations('cart', ['deleteProduct'])
+    // ...mapMutations('cart', ['deleteProduct'])
+  },
+  data () {
+    return {
+      cartProducts: [
+        { 'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01, isChecked: false, count: 0 },
+        { 'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99, isChecked: false, count: 0 },
+        { 'id': 3, 'title': 'Charli XCX - Sucker CD', 'price': 19.99, isChecked: false, count: 0 }
+      ]
+    }
   }
-  // data () {
-  //   return {
-  //     cartProducts: [
-  //       { 'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01, isChecked: false, count: 0 },
-  //       { 'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99, isChecked: false, count: 0 },
-  //       { 'id': 3, 'title': 'Charli XCX - Sucker CD', 'price': 19.99, isChecked: false, count: 0 }
-  //     ]
-  //   }
-  // }
 }
 </script>
 

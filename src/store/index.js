@@ -1,18 +1,24 @@
+// 配置vuex
 import Vue from 'vue'
 import Vuex from 'vuex'
-import cart from './modules/cart'
-import products from './modules/products'
+// 引入模块容器
+import products from './mudules/products'
+import cart from './mudules/cart'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  strict: true,
-  state: {},
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
   getters: {},
   mutations: {},
   actions: {},
+  // 挂载模块,配置模块
   modules: {
-    cart,
-    products
+    products,
+    cart
   }
 })
+
+export default store

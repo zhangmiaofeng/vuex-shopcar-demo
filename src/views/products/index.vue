@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- 测试访问下vuex的数据 -->
+    <h2>{{$store.state.products.message}}</h2>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item><a href="#/">首页</a></el-breadcrumb-item>
       <el-breadcrumb-item><a href="#/">商品列表</a></el-breadcrumb-item>
@@ -27,22 +29,22 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex'
+// import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'ProductList',
-  // data () {
-  //   return {
-  //     products: [
-  //       { 'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01 },
-  //       { 'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99 },
-  //       { 'id': 3, 'title': 'Charli XCX - Sucker CD', 'price': 19.99 }
-  //     ]
-  //   }
-  // },
+  data () {
+    return {
+      products: [
+        { 'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01 },
+        { 'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99 },
+        { 'id': 3, 'title': 'Charli XCX - Sucker CD', 'price': 19.99 }
+      ]
+    }
+  },
 
   computed: {
-    ...mapState('products', ['allProducts'])
+    // ...mapState('products', ['allProducts'])
   },
 
   created () {
@@ -52,8 +54,8 @@ export default {
   },
 
   methods: {
-    ...mapActions('products', ['getAllProducts']),
-    ...mapMutations('cart', ['addToCart'])
+    // ...mapActions('products', ['getAllProducts']),
+    // ...mapMutations('cart', ['addToCart'])
   }
 }
 </script>
