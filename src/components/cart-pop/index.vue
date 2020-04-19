@@ -14,36 +14,36 @@
       </el-table-column>
     </el-table>
     <div>
-      <p>共{{ allCartProductsCount }}件商品 共计¥{{ allCartProductsPrice }}</p>
+      <p>共{{totalCount}}件商品 共计¥{{totalCountPrice}}</p>
       <el-button size="mini" type="danger" @click="$router.push({ name: 'cart' })">去购物车</el-button>
     </div>
-    <el-badge :value="allCartProductsCount" class="item" slot="reference">
+    <el-badge :value="totalCount" class="item" slot="reference">
       <el-button type="primary">我的购物车</el-button>
     </el-badge>
   </el-popover>
 </template>
 
 <script>
-// import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'CartPop',
   computed: {
-    // ...mapState('cart', ['cartProducts']),
-    // ...mapGetters('cart', ['allCartProductsCount', 'allCartProductsPrice'])
+    ...mapState('cart', ['cartProducts']),
+    ...mapGetters('cart', ['totalCount', 'totalCountPrice'])
   },
   methods: {
-    // ...mapMutations('cart', ['deleteProduct'])
-  },
-  data () {
-    return {
-      cartProducts: [
-        { 'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01, isChecked: false, count: 0 },
-        { 'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99, isChecked: false, count: 0 },
-        { 'id': 3, 'title': 'Charli XCX - Sucker CD', 'price': 19.99, isChecked: false, count: 0 }
-      ]
-    }
+    ...mapMutations('cart', ['deleteProduct'])
   }
+  // data () {
+  //   return {
+  //     cartProducts: [
+  //       { 'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01, isChecked: false, count: 0 },
+  //       { 'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99, isChecked: false, count: 0 },
+  //       { 'id': 3, 'title': 'Charli XCX - Sucker CD', 'price': 19.99, isChecked: false, count: 0 }
+  //     ]
+  //   }
+  // }
 }
 </script>
 
